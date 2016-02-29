@@ -1,4 +1,4 @@
- $(function(){
+TD.Object = function(){
 
   function firstscene(){
   //create scene

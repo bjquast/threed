@@ -1,18 +1,12 @@
  $(function(){
 
-  function firstscene(){
   //create scene
   var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-
-  camera.position.x = -10;
-  camera.position.y = 10;
-  camera.position.z = 50;
-  camera.lookAt(scene.position);
-  
-  var renderer = new THREE.WebGLRenderer();
-  renderer.setClearColor( 0x999999 );
-  renderer.shadowMapEnabled = true; 
+  var spotlight = setSpotLight();
+  scene.add( spotlight );
+  scene.add( setAmbientLight() );
+  var camera = setCamera( scene );
+  var renderer =  setDefaultRenderer();
 
   $('#viewbox').append( renderer.domElement );
   renderer.setSize( $('#viewbox').innerWidth() - 100, $('#viewbox').innerHeight() );
@@ -45,7 +39,7 @@
   cube.castShadow = true;
   stripe.castShadow = true;
   plane.receiveShadow = true;
-  spotlight1.castShadow = true;
+  spotlight.castShadow = true;
   
   //add plane to scene
   scene.add( plane );
@@ -64,18 +58,12 @@
     
   render();
 
-  };
-  
   //animate scene ???
   function render() {
    stats.update();
    requestAnimationFrame( render );
 
-   stripe.rotation.x += 0.1;
-   stripe.rotation.y += 0.1;
-       
-   cube.rotation.x += -0.001;
-   cube.rotation.y += -0.001;
+   setAnimation();
 
    renderer.render( scene, camera );
    }
@@ -92,6 +80,53 @@
    return stats;
   }
 
+  //append TrackBallControls
+  /*function setCameraMouseControls() {
+    var cameraControls = new THREE.TrackBallControls(camera);
+    cameraControls.rotationSpeed = 0.1;
+    cameraControls.zoomSpeed = 0.1;
+    cameraControls.panSpeed = 0.1;
+    
+    return cameraControls;
+  }*/
+  
+  //append AmbientLight
+  function setAmbientLight() {
+    var ambiColor = '#bbe2b7';
+    var ambiColor = '#cecece';
+    var ambientLight = new THREE.AmbientLight( ambiColor );
+ 
+    return ambientLight;
+  }
+
+  //append SpotLight
+  function setSpotLight() {
+    var spotlight = new THREE.SpotLight( 0xffffff, 2 );
+    spotlight.position.set( -10, 90 , 10 );
+    spotlight.shadowCameraVisible = true;
+ 
+    return spotlight;
+  }
+   
+  //append Camera To Scene
+  function setCamera( scene ) {
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+    camera.position.x = -10;
+    camera.position.y = 10;
+    camera.position.z = 50;
+    camera.lookAt(scene.position);
+ 
+    return camera;
+  }
+
+  // append Renderer
+  function setDefaultRenderer() {
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setClearColor( 0x999999 );
+    renderer.shadowMapEnabled = true;
+    
+    return renderer;
+  }
   
   //append Animation to Objects
   function setAnimation() {
@@ -101,8 +136,8 @@
    cube.rotation.x += -0.001;
    cube.rotation.y += -0.001;
   }
+  
+  
 
-   
-
-   
+  
 });
