@@ -6,6 +6,7 @@
   scene.add( spotlight );
   scene.add( setAmbientLight() );
   var camera = setCamera( scene );
+  var cameraControls = setCameraMouseControls();
   var renderer =  setDefaultRenderer();
 
   $('#viewbox').append( renderer.domElement );
@@ -55,14 +56,17 @@
       
 
   var stats = initStats();
-    
+  var clock = new THREE.Clock();
+
   render();
 
   //animate scene ???
   function render() {
    stats.update();
+   var delta = clock.getDelta();
+   cameraControls.update( delta );  
+   
    requestAnimationFrame( render );
-
    setAnimation();
 
    renderer.render( scene, camera );
@@ -81,14 +85,14 @@
   }
 
   //append TrackBallControls
-  /*function setCameraMouseControls() {
-    var cameraControls = new THREE.TrackBallControls(camera);
+  function setCameraMouseControls() {
+    var cameraControls = new THREE.TrackballControls(camera);
     cameraControls.rotationSpeed = 0.1;
     cameraControls.zoomSpeed = 0.1;
     cameraControls.panSpeed = 0.1;
     
     return cameraControls;
-  }*/
+  }
   
   //append AmbientLight
   function setAmbientLight() {
@@ -125,6 +129,7 @@
     renderer.setClearColor( 0x999999 );
     renderer.shadowMapEnabled = true;
     
+    
     return renderer;
   }
   
@@ -137,7 +142,5 @@
    cube.rotation.y += -0.001;
   }
   
-  
-
-  
+ 
 });
