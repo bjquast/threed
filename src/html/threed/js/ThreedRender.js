@@ -13,7 +13,7 @@
   scene.add( spotlight );
   scene.add( setAmbientLight() );
   var camera = setCamera( scene );
-  var cameraControls = setCameraMouseControls();
+  var cameraControls = setCameraMouseControls( camera );
   var renderer =  setDefaultRenderer();
 
   $('#viewbox').append( renderer.domElement );
@@ -91,8 +91,8 @@
   }
 
   //append TrackBallControls
-  function setCameraMouseControls() {
-    var cameraControls = new THREE.TrackballControls(camera);
+  function setCameraMouseControls( camera ) {
+    var cameraControls = new THREE.TrackballControls( camera );
     cameraControls.rotationSpeed = 0.1;
     cameraControls.zoomSpeed = 0.1;
     cameraControls.panSpeed = 0.1;
