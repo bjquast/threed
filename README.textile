@@ -1,0 +1,32 @@
+h1. About
+
+Threed is a small project almost for testing purposes. Threed uses THREE.js to implement an generic 3D Object viewer into a webpage
+
+h1. Install
+
+h2. Prerequisites
+
+* Apache
+* perl 
+
+h2. Quick Install
+
+# Get with: git clone https://github.com/aquast/threed.git
+# Copy Folder src/html/threed into your apache webroot (i.e. /srv/html/htdocs/
+# Open in Browser with http://localhost/threed
+
+h1. Status
+
+Alpha 
+
+h1. License
+
+LGPL
+Copyright 2015 Andres Quast
+
+threed makes use of the following third party applications:
+
+THREE https://github.com/mrdoob/three.js/blob/master/LICENSE
+jQuery https://github.com/jquery/jquery/blob/master/LICENSE.txt
+jQuery-UI https://github.com/jquery/jquery-ui/blob/master/LICENSE.txt
+
