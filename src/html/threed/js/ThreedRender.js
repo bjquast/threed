@@ -122,7 +122,7 @@
   
  
   $('#viewbox').on("dialogresizestop",  function( ) {
-    alert($('#viewbox').innerWidth() + "\n" + $('#viewbox').innerHeight());    
+    //alert($('#viewbox').innerWidth() + "\n" + $('#viewbox').innerHeight());    
     renderer.setSize($('#viewbox').innerWidth(), $('#viewbox').innerHeight());
     camera.aspect = $('#viewbox').innerWidth() / $('#viewbox').innerHeight();
     camera.updateProjectionMatrix();
