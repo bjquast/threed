@@ -1,7 +1,7 @@
 $(function(){
 
     $('#viewbox').dialog({
-      modal: true,
+      modal: false,
       autoOpen: false,
       height: ($(window).height() - 60),
       width: ($(window).width() - 60),
