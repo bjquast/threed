@@ -5,11 +5,6 @@ $(function(){
       autoOpen: false,
       height: ($(window).height() - 60),
       width: ($(window).width() - 60),
-      buttons: {
-        Ok: function() {
-          $( this ).dialog( "close" );
-        }
-      }
     });
 
     $('.3dexample').each(function(){

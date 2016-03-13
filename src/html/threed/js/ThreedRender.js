@@ -10,6 +10,10 @@
   tgl.setMaterialUrl( 'resources/Platy72h_LM2_2.mtl' );
   tgl.setBlenderScene( scene );
      
+//  tgl.setObjectUrl( 'resources/raumplanung.obj' );
+//  tgl.setMaterialUrl( 'resources/materials.mtl' );
+//  tgl.setBlenderScene( scene );
+
   var spotlight = setSpotLight();
   spotlight.castShadow = true;
 
@@ -25,15 +29,7 @@
   
   var stats = initStats();
   var clock = new THREE.Clock();
-
-  window.addEventListener('resize', function () {
-    alert(document.getElementById('viewbox').innerWidth);
-    renderer.setSize(document.getElementById('viewbox').innerWidth, document.getElementById('viewbox').innerHeight);
-    camera.aspect = document.getElementById('viewbox').innerWidth / document.getElementById('viewbox').innerHeight;
-    camera.updateProjectionMatrix();
-  });
-
-  
+ 
   render();
 
   // render the scene
@@ -120,10 +116,16 @@
    //cube.rotation.y += -0.001;
   }
   
+  $('#viewbox').on("dialogopen",  function( ) {
+    //alert($('#viewbox').innerWidth() + "\n" + $('#viewbox').innerHeight());    
+    renderer.setSize($('#viewbox').innerWidth() - 45, $('#viewbox').innerHeight() - 35 );
+    camera.aspect = $('#viewbox').innerWidth() / $('#viewbox').innerHeight();
+    camera.updateProjectionMatrix();
+  });
  
   $('#viewbox').on("dialogresizestop",  function( ) {
     //alert($('#viewbox').innerWidth() + "\n" + $('#viewbox').innerHeight());    
-    renderer.setSize($('#viewbox').innerWidth(), $('#viewbox').innerHeight());
+    renderer.setSize($('#viewbox').innerWidth() - 45 , $('#viewbox').innerHeight() - 35 );
     camera.aspect = $('#viewbox').innerWidth() / $('#viewbox').innerHeight();
     camera.updateProjectionMatrix();
   });
