@@ -6,8 +6,8 @@
 
   //load Blender Object via ThreedGenericLoader
   tgl = new ThreedGenericLoader();
-  tgl.setObjectUrl( 'resources/Platy72h_LM2_2.obj' );
-  tgl.setMaterialUrl( 'resources/Platy72h_LM2_2.mtl' );
+  tgl.setObjectUrl( 'resources/example_building.obj' );
+  tgl.setMaterialUrl( 'resources/example_building.mtl' );
   tgl.setBlenderScene( scene );
      
 //  tgl.setObjectUrl( 'resources/raumplanung.obj' );
