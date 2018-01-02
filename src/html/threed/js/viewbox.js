@@ -12,9 +12,7 @@ $(function(){
       $(this).click( function(){
           $('#viewbox').dialog( 'open' );
           $('.ui-dialog-buttonpane').append('<div id="stats"></div>');
+          return false;
       });
     });
-
-    
-    
 }); 

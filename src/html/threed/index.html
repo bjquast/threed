@@ -9,14 +9,25 @@
  <body>
   <div id="viewbox"></div>
   <div id="stats"></div>
-  <div class="3dexample">Ein Beispiel öffnen</div>
+  <div><h1>3D Beispiele</h1></div>
+  <div class="wavefront 3dexample">Blender Objekt öffnen
+    <a class="obj" href="./resources/example_building.obj">Beispiel Gebäude obj</a>
+    <a class="mtl" href="./resources/example_building.mtl">Beispiel Gebäude mtl</a>
+  </div>
+  <div class="collada 3dexample">Collada Objekt öffnen
+    <a class="dae" href="./resources/example_building.dae">Beispiel Gebäude dae</a>
+  </div>
+  
+  
   <script src="lib/jquery.min.js"></script>
   <script src="lib/jquery-ui.min.js"></script>
   <script src="lib/three.min.js"></script>
   <script src="lib/TrackballControls.js"></script>
+  <script src="lib/FirstPersonControls.js"></script>
   <script src="lib/stats.min.js"></script>
   <script src="lib/MTLLoader.js"></script>
   <script src="lib/OBJLoader.js"></script>
+  <script src="lib/ColladaLoader.js"></script>
 
   <!--<script src="js/firstscene.js"></script>-->
   <script src="js/viewbox.js"></script>
