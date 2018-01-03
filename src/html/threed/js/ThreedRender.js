@@ -2,26 +2,38 @@
 
   
   //create scene
-  var scene = new THREE.Scene();
+  var scene = getScene();
+
+  // create GenericLoader
+  tgl = new ThreedGenericLoader();
 
   //load Blender Object via ThreedGenericLoader
-  tgl = new ThreedGenericLoader();
-  tgl.setObjectUrl( 'resources/example_building.obj' );
-  tgl.setMaterialUrl( 'resources/example_building.mtl' );
-  tgl.setBlenderScene( scene );
-     
-//  tgl.setObjectUrl( 'resources/raumplanung.obj' );
-//  tgl.setMaterialUrl( 'resources/materials.mtl' );
-//  tgl.setBlenderScene( scene );
+  $('.wavefront').click(function(){
+    scene = getScene();
+    var objUrl = $(this).find('.obj').attr('href');
+    var mtlUrl = $(this).find('.mtl').attr('href');
 
-  var spotlight = setSpotLight();
-  spotlight.castShadow = true;
+    tgl = new ThreedGenericLoader();
 
-  scene.add( spotlight );
-  scene.add( setAmbientLight() );
-  var camera = setCamera( scene );
-  var cameraControls = setCameraMouseControls( camera );
-  var renderer =  setDefaultRenderer();
+    tgl.setObjectUrl( objUrl );
+    tgl.setMaterialUrl( mtlUrl );
+    tgl.setBlenderScene( scene );;
+  });
+
+  //load Collada Object via ThreedGenericLoader
+  $('.collada').click(function(){
+
+    scene = getScene();
+    var daeUrl = $(this).find('.dae').attr('href');
+    tgl = new ThreedGenericLoader();
+
+    tgl.setObjectUrl( daeUrl );
+    tgl.setColladaScene( scene );
+  });
+
+  var camera = getCamera( scene );
+  var cameraControls = getCameraMouseControls( camera );
+  var renderer =  getDefaultRenderer();
 
   $('#viewbox').append( renderer.domElement );
   renderer.setSize( window.innerWidth - 100, window.innerHeight );
@@ -32,11 +44,12 @@
  
   render();
 
+
   // render the scene
   function render() {
    stats.update();
    var delta = clock.getDelta();
-   cameraControls.update( delta );  
+   cameraControls.update( delta );
    
    requestAnimationFrame( render );
    setAnimation();
@@ -44,6 +57,16 @@
 
    renderer.render( scene, camera );
    }
+
+
+   // initalize scene
+   function getScene( ){
+     var scene = new THREE.Scene();
+     scene.add( getSpotLight() );
+     scene.add( getAmbientLight() );
+
+     return scene;
+   };
 
    // initialize stats
    function initStats() {
@@ -58,7 +81,7 @@
   }
 
   //append TrackBallControls
-  function setCameraMouseControls( camera ) {
+  function getCameraMouseControls( camera ) {
     var cameraControls = new THREE.TrackballControls( camera );
     cameraControls.rotationSpeed = 0.1;
     cameraControls.zoomSpeed = 0.1;
@@ -67,8 +90,24 @@
     return cameraControls;
   }
   
+  //append FirstPersonControls
+  function getCameraFirstPersonControls( camera ) {
+    var cameraControls = new THREE.FirstPersonControls( camera );
+    cameraControls.noFly = true;
+    cameraControls.lookVertical = true;
+    cameraControls.LookSpeed = 0.4;
+    //cameraControls.movementSpeed = 20;
+    cameraControls.constrainVertical = true;
+    cameraControls.verticalMin =0.2;
+    cameraControls.verticalMax = 2.0;
+    cameraControls.lon = 2;
+    cameraControls.lat = 2;
+    return cameraControls;
+  }
+
+
   //append AmbientLight
-  function setAmbientLight() {
+  function getAmbientLight() {
     var ambiColor = '#bbe2b7';
     var ambiColor = '#cecece';
     var ambientLight = new THREE.AmbientLight( ambiColor );
@@ -77,28 +116,30 @@
   }
 
   //append SpotLight
-  function setSpotLight() {
+  function getSpotLight() {
     var spotlight = new THREE.SpotLight( 0xffffff, 2 );
     spotlight.position.set( -10, 90 , 10 );
     spotlight.shadowCameraVisible = true;
+    spotlight.castShadow = true;
+    spotlight.intensity = 0.2;
  
     return spotlight;
   }
    
   //append Camera To Scene
-  function setCamera( scene ) {
+  function getCamera( scene ) {
     //var camera = new THREE.PerspectiveCamera( 75, document.getElementById('viewbox').innerWidth / document.getElementById('viewbox').innerHeight , 0.1, 1000 );
     var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight , 0.1, 1000 );
-    camera.position.x = -10;
-    camera.position.y = 10;
-    camera.position.z = 50;
+    camera.position.x = 0;
+    camera.position.y = 1;
+    camera.position.z = 2;
     camera.lookAt(scene.position);
  
     return camera;
   }
 
   // append Renderer
-  function setDefaultRenderer() {
+  function getDefaultRenderer() {
     var renderer = new THREE.WebGLRenderer();
     renderer.setClearColor( 0x999999 );
     renderer.shadowMapEnabled = true;
