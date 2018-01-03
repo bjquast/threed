@@ -1,3 +1,4 @@
+// generic loader provides format specific loader functions
 ThreedGenericLoader = function( ){
 
   var objUrl = '';

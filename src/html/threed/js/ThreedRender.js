@@ -1,4 +1,6 @@
- $(function(){
+// Renderer calls appropriate loader function from Generic Loader 
+
+$(function(){
 
   
   //create scene
